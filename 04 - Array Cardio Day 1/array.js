@@ -21,30 +21,32 @@ const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick
 
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
-const fifteenHundredsInventors = inventors
+const getFifteenHundredsInventors = () => inventors
   .filter((inventor) => inventor.year >= 1500 && inventor.year < 1600)
-console.log(fifteenHundredsInventors)
+console.log(getFifteenHundredsInventors())
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors' first and last names
-const namesOfInventors = inventors.map((inventor) => `${inventor.first} ${inventor.last}`)
-console.log(namesOfInventors)
+const getNamesOfInventors = () => inventors
+  .map((inventor) => `${inventor.first} ${inventor.last}`)
+console.log(getNamesOfInventors())
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
-const inventorsSortedByBirth = inventors.sort((a, b) => a.year > b.year ? 1 : -1)
-console.log(inventorsSortedByBirth)
+const getInventorsSortedByBirth = () => inventors
+  .sort((a, b) => a.year > b.year ? 1 : -1)
+console.log(getInventorsSortedByBirth())
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
-const totalYearsLived = inventors
+const getTotalYearsLived = () => inventors
   .reduce((total, inventor) => total + (inventor.passed - inventor.year), 0)
-console.log(totalYearsLived)
+console.log(getTotalYearsLived())
 
 // 5. Sort the inventors by years lived
-const inventorsSortedByYearsLived = inventors
+const getInventorsSortedByYearsLived = () => inventors
   .sort((a, b) => (a.passed - a.year) > (b.passed - b.year) ? 1 : -1)
-console.log(inventorsSortedByYearsLived)
+console.log(getInventorsSortedByYearsLived())
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -52,19 +54,21 @@ console.log(inventorsSortedByYearsLived)
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
-const inventorsSortedByLastname = inventors
+const getInventorsSortedByLastname = () => inventors
   .sort((a, b) => a.last > b.last ? 1 : -1)
-console.log(inventorsSortedByLastname)
+console.log(getInventorsSortedByLastname())
 
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-const sum = data.reduce((result, instance) => {
-  if(!result[instance]) {
-    result[instance] = 0
-  }
-  result[instance]++
 
-  return result
-}, {})
-console.log(sum)
+const getSum = () => data
+  .reduce((result, instance) => {
+    if(!result[instance]) {
+      result[instance] = 0
+    }
+    result[instance]++
+
+    return result
+  }, {})
+console.log(getSum())
