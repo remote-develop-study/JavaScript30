@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
+  <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
 </head>
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
@@ -31,28 +35,68 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteens = inventors.filter(inventor => 1600 > inventor.year && inventor.year >= 1500);
+    console.table(fifteens);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const names = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.table(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const elderFirst = inventors.sort((a, b) => b.year - a.year);
+    console.table(elderFirst);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const sum = inventors.reduce((year, inventor) => {
+      return year + inventor.passed - inventor.year;
+    }, 0);
+
+    console.log(sum);
 
     // 5. Sort the inventors by years lived
+    const longLived = inventors.sort((a, b) => {
+      const prev = a.passed - a.year;
+      const curr = b.passed - b.year;
+      return curr - prev;
+    });
+
+    console.table(longLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    const parseHtml = html => $(html);
+    const stringContains = (string, subString) => string.includes(subString);
+    fetch('https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris')
+      .then(res => res.text())
+      .then(html => parseHtml(html))
+      .then($ => {
+        const $links = $.find('.mw-category a').toArray();
+        const filtered = $links.filter($link => stringContains($link.text, 'de')).map($link => $link.text)
+        console.table(filtered);
+      });
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const ordered = people.sort((a, b) => {
+      const SEPARATOR = ',';
+      const aNames = a.split(SEPARATOR);
+      const bNames = b.split(SEPARATOR);
+      return aNames.shift() > bNames.shift() ? 1 : -1;
+    });
+
+    console.table(ordered);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const result = data.reduce((acc, datum) => {
+      datum in acc ? acc[datum] += 1 : acc[datum] = 1;
+      return acc
+    }, {});
+    console.table(result);
 
   </script>
 </body>

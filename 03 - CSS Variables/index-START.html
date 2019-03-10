@@ -65,7 +65,7 @@
   </style>
 
   <script>
-    const inputs = document.querySelectorAll('input')
+    const inputs = document.querySelectorAll('input');
     const root = document.documentElement;
 
     const handleInputChange = (event) => {
@@ -74,8 +74,8 @@
       root.style.setProperty(`--${target.name}`, target.value + unit);
     };
 
-    inputs.forEach(input => input.addEventListener('change', handleInputChange))
-    inputs.forEach(input => input.addEventListener('mousemove', handleInputChange))
+    inputs.forEach(input => input.addEventListener('change', handleInputChange));
+    inputs.forEach(input => input.addEventListener('mousemove', handleInputChange));
 
   </script>
 
