@@ -1,3 +1,4 @@
+const tick = require('./clock').tick
 const getHand = require('./clock').getHand
 const rotateHand = require('./clock').rotateHand
 const createCounter = require('./clock').createCounter

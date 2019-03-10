@@ -54,6 +54,7 @@ const counter = createCounter()
 setInterval(() => tick(counter), 1000)
 
 module.exports = {
+  tick: tick,
   getHand: getHand,
   rotateHand: rotateHand,
   createCounter: createCounter
