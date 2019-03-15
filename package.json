@@ -1,20 +1,47 @@
 {
   "name": "JavaScript30",
   "version": "1.0.0",
-  "description": "![](https://javascript30.com/images/JS3-social-share.png)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ch30": "browser-sync start --server --browser \"google chrome\" --files=\"30 - Whack A Mole/*\" --startPath=\"30 - Whack A Mole/index-START.html\"",
+    "ch29": "browser-sync start --server --browser \"google chrome\" --files=\"29 - Countdown Timer/*\" --startPath=\"29 - Countdown Timer/index-START.html\"",
+    "ch28": "browser-sync start --server --browser \"google chrome\" --files=\"28 - Video Speed Controller/*\" --startPath=\"28 - Video Speed Controller/index-START.html\"",
+    "ch27": "browser-sync start --server --browser \"google chrome\" --files=\"27 - Click and Drag/*\" --startPath=\"27 - Click and Drag/index-START.html\"",
+    "ch26": "browser-sync start --server --browser \"google chrome\" --files=\"26 - Stripe Follow Along Nav/*\" --startPath=\"26 - Stripe Follow Along Nav/index-START.html\"",
+    "ch25": "browser-sync start --server --browser \"google chrome\" --files=\"25 - Event Capture, Propagation, Bubbling and O/*\" --startPath=\"25 - Event Capture, Propagation, Bubbling and Once/index-START.html\"",
+    "ch24": "browser-sync start --server --browser \"google chrome\" --files=\"24 - Sticky Nav/*\" --startPath=\"24 - Sticky Nav/index-START.html\"",
+    "ch23": "browser-sync start --server --browser \"google chrome\" --files=\"23 - Speech Synthesis/*\" --startPath=\"23 - Speech Synthesis/index-START.html\"",
+    "ch22": "browser-sync start --server --browser \"google chrome\" --files=\"22 - Follow Along Link Highlighter/*\" --startPath=\"22 - Follow Along Link Highlighter/index-START.html\"",
+    "ch21": "browser-sync start --server --browser \"google chrome\" --files=\"21 - Geolocation/*\" --startPath=\"21 - Geolocation/index-START.html\"",
+    "ch20": "browser-sync start --server --browser \"google chrome\" --files=\"20 - Speech Detection/*\" --startPath=\"20 - Speech Detection/index-START.html\"",
+    "ch19": "browser-sync start --server --browser \"google chrome\" --files=\"19 - Webcam Fun/*\" --startPath=\"19 - Webcam Fun/index-START.html\"",
+    "ch18": "browser-sync start --server --browser \"google chrome\" --files=\"18 - Adding Up Times with Reduce/*\" --startPath=\"18 - Adding Up Times with Reduce/index-START.html\"",
+    "ch17": "browser-sync start --server --browser \"google chrome\" --files=\"17 - Sort Without Articles/*\" --startPath=\"17 - Sort Without Articles/index-START.html\"",
+    "ch16": "browser-sync start --server --browser \"google chrome\" --files=\"16 - Mouse Move Shadow/*\" --startPath=\"16 - Mouse Move Shadow/index-START.html\"",
+    "ch15": "browser-sync start --server --browser \"google chrome\" --files=\"15 - LocalStorage/*\" --startPath=\"15 - LocalStorage/index-START.html\"",
+    "ch14": "browser-sync start --server --browser \"google chrome\" --files=\"14 - JavaScript References VS Copy/*\" --startPath=\"14 - JavaScript References VS Copying/index-START.html\"",
+    "ch13": "browser-sync start --server --browser \"google chrome\" --files=\"13 - Slide in on Scroll/*\" --startPath=\"13 - Slide in on Scroll/index-START.html\"",
+    "ch12": "browser-sync start --server --browser \"google chrome\" --files=\"12 - Key Sequence Detection/*\" --startPath=\"12 - Key Sequence Detection/index-START.html\"",
+    "ch11": "browser-sync start --server --browser \"google chrome\" --files=\"11 - Custom Video Player/*\" --startPath=\"11 - Custom Video Player/index-START.html\"",
+    "ch10": "browser-sync start --server --browser \"google chrome\" --files=\"10 - Hold Shift and Check Checkbo/*\" --startPath=\"10 - Hold Shift and Check Checkboxes/index-START.html\"",
+    "ch9": "browser-sync start --server --browser \"google chrome\" --files=\"09 - Dev Tools Domination/*\" --startPath=\"09 - Dev Tools Domination/index-START.html\"",
+    "ch8": "browser-sync start --server --browser \"google chrome\" --files=\"08 - Fun with HTML5 Canvas/*\" --startPath=\"08 - Fun with HTML5 Canvas/index-START.html\"",
+    "ch7": "browser-sync start --server --browser \"google chrome\" --files=\"07 - Array Cardio Day 2/*\" --startPath=\"07 - Array Cardio Day 2/index-START.html\"",
+    "ch6": "browser-sync start --server --browser \"google chrome\" --files=\"06 - Type Ahead/*\" --startPath=\"06 - Type Ahead/index-START.html\"",
+    "ch5": "browser-sync start --server --browser \"google chrome\" --files=\"05 - Flex Panel Gallery/*\" --startPath=\"05 - Flex Panel Gallery/index-START.html\"",
+    "ch4": "browser-sync start --server --browser \"google chrome\" --files=\"04 - Array Cardio Day 1/*\" --startPath=\"04 - Array Cardio Day 1/index-START.html\"",
+    "ch3": "browser-sync start --server --browser \"google chrome\" --files=\"03 - CSS Variables/*\" --startPath=\"03 - CSS Variables/index-START.html\"",
+    "ch2": "browser-sync start --server --browser \"google chrome\" --files=\"02 - JS and CSS Clock/*\" --startPath=\"02 - JS and CSS Clock/index-START.html\"",
+    "ch1": "browser-sync start --server --browser \"google chrome\" --files=\"01 - JavaScript Drum Kit/*\" --startPath=\"01 - JavaScript Drum Kit/index-START.html\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jungjuyoung/JavaScript30.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "jungjuyoung <nwwn1004@naver.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jungjuyoung/JavaScript30/issues"
-  },
-  "homepage": "https://github.com/jungjuyoung/JavaScript30#readme"
+  "devDependencies": {
+    "browser-sync": "^2.26.3"
+  }
 }
