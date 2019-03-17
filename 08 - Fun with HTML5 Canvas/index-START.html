@@ -7,6 +7,98 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+  const RainbowCanvas = class {
+    CANVAS_CONTEXT = '2d';
+    LINE_GROW_DIRECTION = { 'SHRINK': 0, 'GROW': 1 };
+    LINE_WIDTH_MIN = 1;
+    LINE_WIDTH_MAX = 100;
+
+    constructor(canvas) {
+      Object.freeze(this.LINE_GROW_DIRECTION); // Freeze object for enumerable usage
+      this.canvas = canvas;
+      this.ctx = this.canvas.getContext(this.CANVAS_CONTEXT);
+      this.offsetX = null;
+      this.offsetY = null;
+      this.hue = 0;
+      this.lineGrow = true;
+      this.isDrawing = false;
+    }
+
+    draw = (event) => {
+      if (!this.isDrawing) return;
+      const { offsetX, offsetY } = event;
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = `hsl(${this.hue} 100% 50%)`;
+      this.ctx.moveTo(this.offsetX, this.offsetY);
+      this.ctx.lineTo(offsetX, offsetY);
+      this.ctx.stroke();
+      this.setOffset(offsetX, offsetY);
+      this.handleLineWidth();
+      this.handleHue();
+    };
+
+    handleLineWidth() {
+      const { lineWidth } = this.ctx;
+
+      if (lineWidth >= this.LINE_WIDTH_MAX) {
+        this.lineGrow = !!this.LINE_GROW_DIRECTION['SHRINK'];
+      }
+
+      if (lineWidth <= this.LINE_WIDTH_MIN) {
+        this.lineGrow = !!this.LINE_GROW_DIRECTION['GROW'];
+      }
+
+      this.lineGrow ? this.setContext({ lineWidth: lineWidth + 1 }) : this.setContext({ lineWidth: lineWidth - 1})
+    }
+
+    handleHue() {
+      this.hue = this.hue >= 360 ? 0 : this.hue + 1;
+    }
+
+    stopDrawing = () => {
+      this.isDrawing = false;
+    };
+
+    startDrawing = (event) => {
+      this.isDrawing = true;
+      this.setOffset(event.offsetX, event.offsetY);
+    };
+
+    setCanvas(canvasOption) {
+      Object.assign(this.canvas, canvasOption);
+      return this;
+    };
+
+    setContext(ctxOption) {
+      Object.assign(this.ctx, ctxOption);
+      return this;
+    };
+
+    setOffset(x, y) {
+      [this.offsetX, this.offsetY] = [x, y];
+      return this;
+    }
+
+    bindMouseEvent() {
+      this.canvas.addEventListener('mousedown', this.startDrawing);
+      this.canvas.addEventListener('mousemove', this.draw);
+      this.canvas.addEventListener('mouseup', this.stopDrawing);
+      this.canvas.addEventListener('mouseout', this.stopDrawing);
+      return this;
+    };
+  };
+
+  const main = () => {
+    const canvas = document.querySelector('#draw');
+    const rainbowCanvas = new RainbowCanvas(canvas);
+    const canvasOption = { width: window.innerWidth, height: window.innerHeight};
+    const contextOption = { lineJoin: 'round', lineCap: 'round', lineWidth: 1 };
+    rainbowCanvas.setCanvas(canvasOption).setContext(contextOption).bindMouseEvent();
+  };
+
+  main();
+
 </script>
 
 <style>

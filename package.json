@@ -39,5 +39,8 @@
     "ch3": "browser-sync start --server --browser \"google chrome\" --files=\"03 - CSS Variables/*\" --startPath=\"03 - CSS Variables/index-START.html\"",
     "ch2": "browser-sync start --server --browser \"google chrome\" --files=\"02 - JS and CSS Clock/*\" --startPath=\"02 - JS and CSS Clock/index-START.html\"",
     "ch1": "browser-sync start --server --browser \"google chrome\" --files=\"01 - JavaScript Drum Kit/*\" --startPath=\"01 - JavaScript Drum Kit/index-START.html\""
+  },
+  "dependencies": {
+    "prettier": "^1.16.4"
   }
 }
