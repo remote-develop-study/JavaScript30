@@ -35,11 +35,19 @@ input.search {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
 }
 
+.updated {
+  background-color: bisque;
+  opacity: 0.3;
+  transform: skew(10deg, 10deg);
+}
+
 .suggestions {
   margin: 0;
   padding: 0;
   position: relative;
-  /*perspective: 20px;*/
+  /* what is this property? */
+  /* perspective: 20px; */
+  transition: ease-in-out 1.5s;
 }
 
 .suggestions li {
