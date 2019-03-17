@@ -15,7 +15,61 @@
     </ul>
   </form>
 <script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const places = [];
+const input = document.querySelector('.search');
+const suggestionsContainer = document.querySelector('.suggestions');
+
+const getPlaces = async () => {
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  const response = await fetch(endpoint);
+
+  if (!response.ok) throw 'Cannot load JSON data';
+  return await response.json();
+};
+
+const createSuggestionElement = (range, searchTerm, { city, state, population }) => {
+  const regExpr = new RegExp(searchTerm, 'gi');
+  const cityHighlighted = city.replace(regExpr, `<span class="hl">${searchTerm}</span>`);
+  const stateHighlighted = state.replace(regExpr, `<span class="hl">${searchTerm}</span>`);
+  const html = `
+    <li>
+      <span class="name">${cityHighlighted} ${stateHighlighted}</span>
+      <span class="population">${parseInt(population).toLocaleString()}</span>
+    </li>
+  `;
+  return range.createContextualFragment(html);
+};
+
+const checkSubString = (needle, ...hayStacks) => {
+  return hayStacks.some(hayStack => !!~hayStack.toLowerCase().indexOf(needle))
+};
+
+const filterPlaces = (searchTerm, places) => places.filter(place => checkSubString(searchTerm, place.city, place.state));
+
+const truncateChildren = (range, node) => {
+  range.selectNodeContents(node);
+  range.deleteContents();
+  return range
+};
+
+const mappingChildren = (fragments, target) => {
+  fragments.map(fragment => target.appendChild(fragment));
+};
+
+const showMatches = (event) => {
+  const { value } = event.target;
+  const searchTerm = value.toLowerCase();
+  const range = document.createRange();
+  let filteredPlaces = value ? filterPlaces(searchTerm, places) : places;
+  const fragments = filteredPlaces.map(place => createSuggestionElement(range, searchTerm, place));
+  truncateChildren(range, suggestionsContainer);
+  mappingChildren(fragments, suggestionsContainer);
+};
+
+getPlaces().then(data => places.push(...data)).catch(err => console.error(err));
+
+input.addEventListener('change', showMatches);
+input.addEventListener('keyup', showMatches);
 
 </script>
 </body>
