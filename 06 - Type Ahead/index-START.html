@@ -27,17 +27,16 @@ const getPlaces = async () => {
   return await response.json();
 };
 
-const createSuggestionElement = (range, searchTerm, { city, state, population }) => {
+const createSuggestionElement = (searchTerm, { city, state, population }) => {
   const regExpr = new RegExp(searchTerm, 'gi');
   const cityHighlighted = city.replace(regExpr, `<span class="hl">${searchTerm}</span>`);
   const stateHighlighted = state.replace(regExpr, `<span class="hl">${searchTerm}</span>`);
-  const html = `
+  return `
     <li>
       <span class="name">${cityHighlighted} ${stateHighlighted}</span>
       <span class="population">${parseInt(population).toLocaleString()}</span>
     </li>
-  `;
-  return range.createContextualFragment(html);
+  `
 };
 
 const checkSubString = (needle, ...hayStacks) => {
@@ -46,23 +45,21 @@ const checkSubString = (needle, ...hayStacks) => {
 
 const filterPlaces = (searchTerm, places) => places.filter(place => checkSubString(searchTerm, place.city, place.state));
 
-const truncateChildren = (range, node) => {
-  range.selectNodeContents(node);
-  range.deleteContents();
-  return range
+const truncateChildren = (node) => {
+  node.innerHTML = '';
+  return node
 };
 
 const mappingChildren = (fragments, target) => {
-  fragments.map(fragment => target.appendChild(fragment));
+  fragments.map(fragment => target.insertAdjacentHTML('beforeend', fragment));
 };
 
 const showMatches = (event) => {
   const { value } = event.target;
   const searchTerm = value.toLowerCase();
-  const range = document.createRange();
   let filteredPlaces = value ? filterPlaces(searchTerm, places) : places;
-  const fragments = filteredPlaces.map(place => createSuggestionElement(range, searchTerm, place));
-  truncateChildren(range, suggestionsContainer);
+  const fragments = filteredPlaces.map(place => createSuggestionElement(searchTerm, place));
+  truncateChildren(suggestionsContainer);
   mappingChildren(fragments, suggestionsContainer);
 };
 
