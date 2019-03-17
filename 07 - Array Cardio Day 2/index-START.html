@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪💪</title>
+  <script src="https://unpkg.com/moment@^2"></script>
 </head>
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
@@ -26,15 +27,32 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    const checkAdult = birthYear => (moment().year() - birthYear) >= 19;
+    const isAdult = people.some(person => checkAdult(person.year));
+    console.log({ isAdult });
+
     // Array.prototype.every() // is everyone 19 or older?
+    const areAllAdults = people.every(person => checkAdult(person.year));
+    console.log({ areAllAdults });
 
-    // Array.prototype.find()
-    // Find is like filter, but instead returns just the one you are looking for
-    // find the comment with the ID of 823423
+    {
+      // Array.prototype.find()
+      // Find is like filter, but instead returns just the one you are looking for
+      // find the comment with the ID of 823423
+      const findById = toFind => comment => comment.id === toFind;
+      const $823423 = comments.find(findById(823423));
+      console.log($823423);
 
-    // Array.prototype.findIndex()
-    // Find the comment with this ID
-    // delete the comment with the ID of 823423
+      // Array.prototype.findIndex()
+      // Find the comment with this ID
+      const index = comments.findIndex(findById(823423));
+      console.log(index);
+
+      // delete the comment with the ID of 823423
+      const newComments = [ ...comments.slice(0, index), ...comments.slice(index + 1)]
+      console.table(newComments);
+    }
+
 
   </script>
 </body>
