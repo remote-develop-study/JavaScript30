@@ -96,6 +96,55 @@
   </div>
 
 <script>
+  // 아무것도 선택 안한 상태에서 Shift 클릭 했을 경우 해당 지점까지 체크 하도록 하자
+  // Shift 를 누르고 체크된 박스를 선택하면 이 전 연속된 체크 박스를 해제하도록 하자
+  class AdvancedCheckbox {
+    constructor(checkboxes) {
+      this.checkboxes = Array.from(checkboxes)
+    }
+
+    getIndex = (target) => {
+      return this.checkboxes.indexOf(target)
+    };
+
+    handleCheckbox = (event) => {
+      const { currentTarget } = event;
+      const { checked } = currentTarget;
+      if (event.shiftKey && checked)  {
+        this.fillCheckboxes(currentTarget)
+      }
+
+      if (event.shiftKey && !checked) {
+        this.emptyCheckboxes(currentTarget)
+      }
+    };
+
+    fillCheckboxes = (target) => {
+      let currentIndex = this.getIndex(target);
+      while (true) {
+        currentIndex = currentIndex - 1;
+        const checkbox = this.checkboxes[currentIndex];
+        if (currentIndex < 0 || checkbox.checked) { break; }
+        checkbox.checked = true;
+      }
+    };
+
+    emptyCheckboxes = (target) => {
+      let currentIndex = this.getIndex(target);
+      let checkbox = index => this.checkboxes[index];
+      checkbox(currentIndex).checked = false;
+
+      while (true) {
+        currentIndex = currentIndex - 1;
+        if (currentIndex < 0 || !checkbox(currentIndex).checked) { break; }
+        checkbox(currentIndex).checked = false;
+      }
+    };
+  }
+
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+  const advancedCheckbox = new AdvancedCheckbox(checkboxes);
+  checkboxes.forEach(input => input.addEventListener('click', advancedCheckbox.handleCheckbox))
 </script>
 </body>
 </html>
