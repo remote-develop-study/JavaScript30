@@ -6,7 +6,6 @@ excludes=(
   'yarn.lock'
   'publish.sh'
   'package.json'
-  'yarn.lock'
   'PULL_REQUEST_TEMPLATE.md'
   'readme.md'
   'node_modules/*'
