@@ -1,46 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
+    <meta charset="UTF-8">
+    <title>Console Tricks!</title>
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+<p onClick="makeGreen()">×BREAK×DOWN×</p>
+<button onclick="clearConsole()">Clear Console</button>
+<button onclick="restoreConsole()">Restore Console</button>
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+<script>
+  const archive = new Set();
+  const MAX_BACKUP_SIZE = 1000;
+  console = new Proxy(console, {
+    get: function(target, propKey, receiver) {
+      const method = target[propKey];
+      const excludes = ['memory', 'clear'];
+      if (excludes.includes(propKey.toString())) {
+        return method;
+      }
+      return (...args) => {
+        const backup = { [propKey]: Array.from(args) };
+        const serialized = JSON.stringify(backup);
+        archive.size > MAX_BACKUP_SIZE && archive.clear();
+        !archive.has(serialized) && archive.add(serialized);
+        return method.apply(this, args);
+      };
+    },
+  });
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
+  function clearConsole() {
+    console.clear();
+  }
+
+  function restoreConsole() {
+    if (archive.size) {
+      archive.forEach(data => {
+        const log = JSON.parse(data);
+        Object.entries(log).map(([key, value]) => console[key](...value))
+      });
     }
+  }
 
-    // Regular
+  const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
-    // Interpolated
+  function makeGreen() {
+    const p = document.querySelector('p');
+    p.style.color = '#BADA55';
+    p.style.fontSize = '50px';
+  }
 
-    // Styled
+  // MDN Document for Console → https://developer.mozilla.org/ko/docs/Web/API/Console
+  // Regular
+  console.log('Hello World!');
 
-    // warning!
+  // Interpolated (%o, %d, %i, %s, %f, %c)
+  console.log('Hello I am a %s string!', '💩');
+  console.log('Hello I am a %d number!', 3);
+  console.log('Hello I am a also %i number!', 2);
+  console.log('Hello I am a %f real number!', 3.1415);
+  console.log('Hello I am an %o object!', { 'name': 'DoonDoony' });
 
-    // Error :|
+  // Styled
+  console.log('This is %cMy stylish message', 'color: yellow; font-style: italic; background-color: blue;padding: 2px');
+  console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue');
 
-    // Info
+  // warning!
+  console.warn('Warning');
 
-    // Testing
+  // Error :|
+  console.error('Noooooooo!😭');
 
-    // clearing
+  // Info
+  console.info('[리빙포인트] 음식이 싱거울때는 소금 간을 하면 좋다');
 
-    // Viewing DOM Elements
+  const $p = document.querySelector('p');
 
-    // Grouping together
+  // Testing
+  console.log($p.classList.contains('oops'), 'Not exist');
 
-    // counting
+  // clearing
+  // console.clear();
 
-    // timing
+  // Viewing DOM Elements
+  console.log($p); // will displays html string
+  console.dir($p); // will displays JavaScript Object
 
-  </script>
+  // Grouping together
+  dogs.forEach(dog => {
+    console.groupCollapsed(dog.name);
+    console.log(`This is ${dog.name}`);
+    console.log(`${dog.name} is ${dog.age} years old`);
+    console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+    console.groupEnd(dog.name); // A console group name is required for backup
+  });
+
+  // counting
+  console.count('DD');
+  console.count('TT');
+  console.count('Momo');
+  console.count('Coco');
+  console.count('Lala');
+  console.count('ChuChu');
+  console.count('Lulu');
+  console.count('DD');
+  console.count('TT');
+  console.count('DD');
+  console.count('TT');
+  console.count('Coco');
+  console.count('Lala');
+
+  // timing
+  console.time('fetching data');
+  fetch('https://api.github.com/users/wesbos')
+    .then(data => data.json())
+    .then(data => {
+      console.timeEnd('fetching data');
+      console.log(data);
+    });
+
+  console.table(dogs);
+
+</script>
 </body>
 </html>
