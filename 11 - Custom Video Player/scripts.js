@@ -36,6 +36,7 @@ const handleProgress = (event) => {
 
 const scrub = (event) => {
   // Q: pageX, offsetX, clientX ... what is the difference between those?
+  // what is relationship with units like px, vh, vw, %, rem, em?
   // -> 정리해서 블로그에 올리기
   const scrubTime = (event.offsetX / progress.offsetWidth) * video.duration
   video.currentTime = scrubTime
