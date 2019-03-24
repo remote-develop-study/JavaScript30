@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>HTML Video Player</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -14,7 +15,9 @@
        <div class="progress">
         <div class="progress__filled"></div>
        </div>
-       <button class="player__button toggle" title="Toggle Play">►</button>
+       <button class="player__button toggle" title="Toggle Play">
+         <i class="fa fa-pause"></i>
+       </button>
        <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
        <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
        <button data-skip="-10" class="player__button">« 10s</button>
@@ -22,6 +25,6 @@
      </div>
    </div>
 
-  <script src="scripts-FINISHED.js"></script>
+  <script src="./scripts.js"></script>
 </body>
 </html>
