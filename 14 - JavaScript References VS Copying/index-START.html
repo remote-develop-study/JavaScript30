@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
 </head>
 <body>
 
@@ -27,12 +28,23 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    const team1 = players.slice();
 
     // or create a new array and concat the old one in
+    const team2 = [].concat(players);
 
     // or use the new ES6 Spread
+    const team3 = [...players];
 
     // now when we update it, the original one isn't changed
+    team3[3] = 'DoonDoony!';
+
+    console.group('Array Copy');
+    console.log(players);
+    console.log(team1);
+    console.log(team2);
+    console.log(team3);
+    console.groupEnd();
 
     // The same thing goes for objects, let's say we have a person object
 
@@ -45,10 +57,43 @@
     // and think we make a copy:
 
     // how do we take a copy instead?
+    const person1 = Object.assign({}, person);
 
     // We will hopefully soon see the object ...spread
+    const person2 = { ...person };
+
+    person2.name = 'DoonDoony!';
+
+    console.group('Object Copy');
+    console.log(person);
+    console.log(person1);
+    console.log(person2);
+    console.groupEnd();
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const creamheroes = {
+      owner: 'butler',
+      members: ['DD', 'TT', 'Coco', 'Momo', 'Lala', 'Chuchu', 'Lulu'],
+      homepage: 'http://creamheroes.com/',
+    };
+
+    const newCreamheroes = Object.assign({}, creamheroes);
+    newCreamheroes.members.pop();
+    console.group('Shallow Copy');
+    console.log(creamheroes); // members.length has been changed
+    console.log(newCreamheroes);
+    console.groupEnd();
+
+    const immerCreamheroes = immer.produce(creamheroes, draftState => {
+      draftState.members.push('Lulu');
+      draftState.youtube = 'https://goo.gl/H6CvUD';
+      draftState.numbers = draftState.members.length;
+    });
+
+    // https://hackernoon.com/introducing-immer-immutability-the-easy-way-9d73d8f71cb3
+    console.group('Immer');
+    console.log(immerCreamheroes);
+    console.groupEnd();
 
   </script>
 
