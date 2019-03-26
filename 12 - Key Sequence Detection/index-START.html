@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Key Detection</title>
-  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+    <meta charset="UTF-8">
+    <title>Key Detection</title>
+    <script src="http://www.cornify.com/js/cornify.js" type="text/javascript"></script>
 </head>
 <body>
 <script>
+  const SECRET = 'creamheroes';
+  const CharQueue = new Proxy([], {
+    MAX_SIZE: SECRET.length,
+    SYNC: 0,
+    set(target, p, value, receiver) {
+
+      if (target.length > this.MAX_SIZE) {
+        target.shift();
+        target = target.filter(t => t);
+      }
+
+      const result = target[p] = value;
+
+      this.SYNC = Array.from(SECRET).reduce((acc, curr, index) => {
+        acc += target[index] === curr ? 1 / SECRET.length : 0;
+        return acc
+      }, 0);
+
+      console.log(`CURRENT INPUTS: ${target.join('')}`);
+      console.log(`The secret code is ${(this.SYNC * 100).toFixed(2)}% released...`);
+      return result;
+    },
+  });
+
+  CharQueue.checkSecret = function(secret) {
+    const pressed = this.join('');
+    if (pressed.includes(secret)) {
+      console.log(`Behold! The might of %c${SECRET}`, 'color: white; font-style: italic; background-color: palevioletred; padding: 2px');
+      cornify_add();
+    }
+  };
+
+  const handleKeyup = ({ key }) => {
+    CharQueue.push(key);
+    CharQueue.checkSecret(SECRET);
+  };
+
+  window.addEventListener('keyup', handleKeyup)
 </script>
 </body>
 </html>

@@ -58,6 +58,32 @@
       };
     }
 
+    const images = document.querySelectorAll('img');
+
+    const checkSlide = () => {
+      images.forEach((image, index) => {
+        const rect = image.getBoundingClientRect();
+        const half = rect.height / 2;
+        const isSeenHalf = window.innerHeight - rect.top > half || window.innerHeight > rect.bottom > half;
+        const invisible = rect.bottom < 0 || rect.top > window.innerHeight;
+
+        console.group(`Image #${index}`);
+        console.log('top', rect.top);
+        console.log('bottom', rect.bottom);
+        console.log('isSeenHalf', isSeenHalf);
+        console.log('invisible', invisible);
+        console.log('classes', image.classList);
+        console.groupEnd();
+
+        // 이미 아예 이미지가 안보인다면, 이미지 deactivate
+        // 이미지의 절반이 "위에서 중간까지" 노출 된다면, activate
+        isSeenHalf && image.classList.add('active');
+        invisible && image.classList.remove('active');
+      });
+    };
+
+    window.addEventListener('scroll', debounce(checkSlide));
+
   </script>
 
   <style>
