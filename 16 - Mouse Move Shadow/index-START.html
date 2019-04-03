@@ -35,6 +35,40 @@
   </style>
 
 <script>
+  /*
+  🐶 할 얘기
+  1. textShadow 에서 -가 앞에 붙어 있으면 동작 안함
+  2. X, Y 값이 왜 저렇게 위치해야하는지 모르겠음
+   */
+  const $text = document.querySelector('h1[contenteditable]');
+  const $hero = document.querySelector('.hero');
+  const { offsetWidth: width, offsetHeight: height } = $hero;
+  const boundary = 300;
+
+  const handleMouseMove = (event) => {
+    const { currentTarget, target } = event;
+    let { offsetX: x, offsetY: y } = event;
+
+
+    if (currentTarget !== target) {
+      const { offsetLeft: left, offsetTop: top } = target;
+      x = x + left;
+      y = y + top;
+    }
+
+    const coordX = Math.round((x / width * boundary) - (boundary / 2));
+    const coordY = Math.round((y / height * boundary) - (boundary / 2));
+
+    $text.style.textShadow = `
+      ${coordX}px ${coordY}px 0 rgba(255, 0, 255, 0.7),
+      ${coordX * -1}px ${coordY}px 0 rgba(255, 255, 0, 0.7),
+      ${coordY}px ${coordX * -1}px 0 rgba(0, 0, 255, 0.7),
+      ${coordY * -1}px ${coordX}px 0 rgba(0, 255, 255, 0.7)
+    `
+  };
+
+  $hero.addEventListener('mousemove', handleMouseMove)
+
 </script>
 </body>
 </html>
