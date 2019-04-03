@@ -6,91 +6,109 @@
 </head>
 <body>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
-      background-size: cover;
-      display: flex;
-      align-items: center;
-      min-height: 100vh;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-    #bands {
-      list-style: inside square;
-      font-size: 20px;
-      background: white;
-      width: 500px;
-      margin: auto;
-      padding: 0;
-      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
-    }
-    
-    #bands li {
-      border-bottom: 1px solid #efefef;
-      padding: 20px;
-    }
-    
-    #bands li:last-child {
-      border-bottom: 0;
-    }
+  #bands {
+    list-style: inside square;
+    font-size: 20px;
+    background: white;
+    width: 500px;
+    margin: auto;
+    padding: 0;
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+  }
 
-    a {
-      color: #ffc600;
-      text-decoration: none;
-    }
+  #bands li {
+    border-bottom: 1px solid #efefef;
+    padding: 20px;
+  }
 
-  </style>
+  #bands li:last-child {
+    border-bottom: 0;
+  }
 
-  <ul id="bands"></ul>
+  a {
+    color: #ffc600;
+    text-decoration: none;
+  }
+
+</style>
+
+<ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
-const curry = (fn) => (...args) => {
-  if (args.length >= fn.length) {
-    return fn.apply(this, args)
-  } else {
-    return curry(fn.bind(this, ...args))
-  }
-};
-const map = curry((iteratee, collection) => {
-  const acc = [];
-  for (const item of collection) {
-    acc.push(iteratee(item))
-  }
-  return acc;
-});
-const reduce = (iteratee, collection, accumulator) => {
-  if (!accumulator) {
-    collection = collection[Symbol.iterator]();
-    accumulator = collection.next().value;
-  }
+  /*
+   🐶 할 얘기
+   1. 함수형 프로그래밍 적용
+   */
+  const bands = [
+    'The Plot in You',
+    'The Devil Wears Prada',
+    'Pierce the Veil',
+    'Norma Jean',
+    'The Bled',
+    'Say Anything',
+    'The Midway State',
+    'We Came as Romans',
+    'Counterparts',
+    'Oh, Sleeper',
+    'A Skylit Drive',
+    'Anywhere But Here',
+    'An Old Dog',
+  ];
+  const curry = (fn) => (...args) => {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    } else {
+      return curry(fn.bind(this, ...args));
+    }
+  };
+  const map = curry((iteratee, collection) => {
+    const acc = [];
+    for (const item of collection) {
+      acc.push(iteratee(item));
+    }
+    return acc;
+  });
+  const reduce = (iteratee, collection, accumulator) => {
+    if (!accumulator) {
+      collection = collection[Symbol.iterator]();
+      accumulator = collection.next().value;
+    }
 
-  for (const item of collection) {
-    accumulator = iteratee(item, accumulator)
-  }
+    for (const item of collection) {
+      accumulator = iteratee(item, accumulator);
+    }
 
-  return accumulator;
-};
+    return accumulator;
+  };
 
-const go = (...args) => reduce((fn, arg) => fn(arg), args);
-const pipe = (...fns) => stream => go(stream, ...fns);
-const strip = curry((needle, hayStack) => hayStack.replace(needle, '').trim());
-const stripArticle = strip(/(the |a |an )/i);
-const sort = curry((project, collection) => collection.sort(project));
-const createBand = (rawData) => `<li>${rawData}</li>`;
-const renderToDom = curry((containerSelector, child) => {
-  document.querySelector(containerSelector).insertAdjacentHTML('beforeend', child);
-});
+  const go = (...args) => reduce((fn, arg) => fn(arg), args);
+  const pipe = (...fns) => stream => go(stream, ...fns);
+  const strip = curry((needle, hayStack) => hayStack.replace(needle, '').trim());
+  const stripArticle = strip(/(the |a |an )/i);
+  const sort = curry((project, collection) => collection.sort(project));
+  const createBand = (rawData) => `<li>${rawData}</li>`;
+  const renderToDom = curry((containerSelector, child) => {
+    document.querySelector(containerSelector).insertAdjacentHTML('beforeend', child);
+  });
 
-const main = pipe(
-  sort((a, b) => stripArticle(a) > stripArticle(b) ? 1 : -1),
-  map(createBand),
-  map(renderToDom('#bands')),
-);
+  const main = pipe(
+    sort((a, b) => stripArticle(a) > stripArticle(b) ? 1 : -1),
+    map(createBand),
+    map(renderToDom('#bands')),
+  );
 
-main(bands);
+  main(bands);
 
 </script>
 
