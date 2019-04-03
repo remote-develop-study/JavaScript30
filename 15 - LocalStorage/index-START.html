@@ -162,7 +162,7 @@
         const initializer = localStorage.length ? clearFoods : renderPlaceholder.bind(null, placeholder);
         globals.delay(initializer, 500)
                .then((resolve) => resolve())
-               .then((resolve) => [...localStorage].map(food => renderFood(food)))
+               .then((resolve) => [...localStorage].sort((a, b) => a.id < b.id ? 1 : -1).map(food => renderFood(food)))
                .catch((reason => {
                  console.error(reason);
                  localStorage.clear();
