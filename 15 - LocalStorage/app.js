@@ -4,7 +4,7 @@ const items = JSON.parse(localStorage.getItem('items')) || [] // Data
 
 function addItem(event) {
   event.preventDefault()
-  const text = (this.querySelector('[name=item]')).value
+  const text = (event.currentTarget.querySelector('[name=item]')).value
   const item = {
     text,
     done: false
@@ -13,7 +13,7 @@ function addItem(event) {
   items.push(item)
   populateList(items, itemsList)
   localStorage.setItem('items', JSON.stringify(items))
-  this.reset() // Thing I learned!
+  event.currentTarget.reset() // Thing I learned!
 }
 
 function populateList(plates = [], platesList) {
