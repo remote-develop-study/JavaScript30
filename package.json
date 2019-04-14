@@ -20,7 +20,7 @@
     "ch22": "browser-sync start --server --browser \"google chrome\" --files=\"22 - Follow Along Link Highlighter/*\" --startPath=\"22 - Follow Along Link Highlighter/index-START.html\"",
     "ch21": "browser-sync start --server --browser \"google chrome\" --files=\"21 - Geolocation/*\" --startPath=\"21 - Geolocation/index-START.html\"",
     "ch20": "browser-sync start --server --browser \"google chrome\" --files=\"20 - Speech Detection/*\" --startPath=\"20 - Speech Detection/index-START.html\"",
-    "ch19": "browser-sync start --server --browser \"google chrome\" --files=\"19 - Webcam Fun/*\" --startPath=\"19 - Webcam Fun/index-START.html\"",
+    "ch19": "browser-sync start --server --browser \"google chrome\" --files=\"19 - Webcam Fun/*\" --startPath=\"19 - Webcam Fun/index.html\"",
     "ch18": "browser-sync start --server --browser \"google chrome\" --files=\"18 - Adding Up Times with Reduce/*\" --startPath=\"18 - Adding Up Times with Reduce/index-START.html\"",
     "ch17": "browser-sync start --server --browser \"google chrome\" --files=\"17 - Sort Without Articles/*\" --startPath=\"17 - Sort Without Articles/index-START.html\"",
     "ch16": "browser-sync start --server --browser \"google chrome\" --files=\"16 - Mouse Move Shadow/*\" --startPath=\"16 - Mouse Move Shadow/index-START.html\"",
