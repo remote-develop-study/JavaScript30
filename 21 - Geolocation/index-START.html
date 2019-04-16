@@ -59,6 +59,59 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+    const arrow = document.querySelector('.arrow');
+    const speed = document.querySelector('.speed-value');
+    /*
+    뭘 해야할지 몰라서 https://w3c.github.io/geolocation-api/#navi-geo 문서를 읽어 보았다
+    노트북을 들고 돌아다닐수는 없으니까 🤔
+
+    이런 예제도 있는데 신선했다
+     EXAMPLE 6: Forcing the user agent to return any available cached position
+     // Request a position. We only accept cached positions, no matter what
+     // their age is. If the user agent does not have a cached position at
+     // all, it will immediately invoke the error callback.
+     navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {maximumAge:Infinity, timeout:0});
+
+     function successCallback(position) {
+       // By setting the 'maximumAge' to Infinity, the position
+       // object is guaranteed to be a cached one.
+       // By using a 'timeout' of 0 milliseconds, if there is
+       // no cached position available at all, the user agent
+       // will immediately invoke the error callback with code
+       // TIMEOUT and will not initiate a new position
+       // acquisition process.
+       if (position.timestamp < freshness_threshold &&
+         position.coords.accuracy < accuracy_threshold) {
+         // The position is relatively fresh and accurate.
+       } else {
+         // The position is quite old and/or inaccurate.
+       }
+     }
+
+     function errorCallback(error) {
+       switch(error.code) {
+         case error.TIMEOUT:
+           // Quick fallback when no cached position exists at all.
+           doFallback();
+           // Acquire a new position object.
+           navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+           break;
+         case ... // treat the other error cases.
+       };
+     }
+
+     function doFallback() {
+       // No cached position available at all.
+       // Fallback to a default position.
+     }
+     */
+    navigator.geolocation.watchPosition((data) => {
+      console.log(data);
+      speed.textContent = data.coords.speed;
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.error(err);
+    });
   </script>
 </body>
 </html>
