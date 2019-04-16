@@ -27,6 +27,30 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // 🖕 이거 뭐야 징그러워
+
+    const links = document.querySelectorAll("a[href]");
+    const highlight = document.createElement('span');
+    highlight.classList.add('highlight');
+    document.body.appendChild(highlight);
+
+    const handleMouseEnter = event => {
+      const { currentTarget: target } = event;
+      const rect = target.getBoundingClientRect();
+      const linkRect = {
+        width: rect.width,
+        height: rect.height,
+        top: rect.top,
+        left: rect.left,
+      };
+
+      highlight.style.width = `${linkRect.width}px`;
+      highlight.style.height = `${linkRect.height}px`;
+      highlight.style.transform = `translate(${linkRect.left}px, ${linkRect.top}px)`;
+    };
+
+    links.forEach(link => link.addEventListener('mouseenter', handleMouseEnter));
+
   </script>
 </body>
 </html>
