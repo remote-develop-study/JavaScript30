@@ -42,7 +42,28 @@
 
 <button></button>
 <script>
+  // 좋은 설명들
+  // 1. https://javascript.info/bubbling-and-capturing
+  // 2. https://www.webreflection.co.uk/blog/2016/04/17/new-dom4-standards
+  // 3. https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+  // 4. https://wonism.github.io/event-bubbling-capturing/
+  const $divs = document.querySelectorAll('div');
+  const log = ({ currentTarget }) => {
+    console.log(currentTarget.classList.value);
+  };
 
+  const captureOptions = {
+    capture: true,
+    once: false,
+  };
+
+  const onceOptions = {
+    capture: false,
+    once: true,
+  };
+
+  // $divs.forEach($div => $div.addEventListener('click', log, eventOptions))
+  $divs.forEach($div => $div.addEventListener('click', log, onceOptions))
 </script>
 </body>
 </html>

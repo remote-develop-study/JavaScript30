@@ -14,7 +14,7 @@
     "ch28": "browser-sync start --server --browser \"google chrome\" --files=\"28 - Video Speed Controller/*\" --startPath=\"28 - Video Speed Controller/index-START.html\"",
     "ch27": "browser-sync start --server --browser \"google chrome\" --files=\"27 - Click and Drag/*\" --startPath=\"27 - Click and Drag/index-START.html\"",
     "ch26": "browser-sync start --server --browser \"google chrome\" --files=\"26 - Stripe Follow Along Nav/*\" --startPath=\"26 - Stripe Follow Along Nav/index-START.html\"",
-    "ch25": "browser-sync start --server --browser \"google chrome\" --files=\"25 - Event Capture, Propagation, Bubbling and O/*\" --startPath=\"25 - Event Capture, Propagation, Bubbling and Once/index-START.html\"",
+    "ch25": "browser-sync start --server --browser \"google chrome\" --files=\"25 - Event Capture, Propagation, Bubbling and Once/*\" --startPath=\"25 - Event Capture, Propagation, Bubbling and Once/index-START.html\"",
     "ch24": "browser-sync start --server --browser \"google chrome\" --files=\"24 - Sticky Nav/*\" --startPath=\"24 - Sticky Nav/index-START.html\"",
     "ch23": "browser-sync start --server --browser \"google chrome\" --files=\"23 - Speech Synthesis/*\" --startPath=\"23 - Speech Synthesis/index-START.html\"",
     "ch22": "browser-sync start --server --browser \"google chrome\" --files=\"22 - Follow Along Link Highlighter/*\" --startPath=\"22 - Follow Along Link Highlighter/index-START.html\"",
