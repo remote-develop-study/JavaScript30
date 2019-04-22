@@ -14,7 +14,7 @@
     <ul class="cool">
       <li>
         <a href="#">About Me</a>
-        <div class="dropdown dropdown1">
+        <div class="dropdown about">
           <div class="bio">
             <img src="https://logo.clearbit.com/wesbos.com">
             <p>Wes Bos sure does love web development. He teaches things like JavaScript, CSS and BBQ. Wait. BBQ isn't part of web development. It should be though!</p>
@@ -130,7 +130,7 @@
   }
 
   .dropdown {
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     overflow: hidden;
     padding: 20px;
@@ -220,6 +220,43 @@
 </style>
 
 <script>
+  const $menus = document.querySelectorAll('li');
+  const $background = document.querySelector('.dropdownBackground');
+  const $nav = document.querySelector('.top');
+  const toInlineStyleText = (rect) => `width: ${rect.width}px; height: ${rect.height}px; transform: translate(${rect.left}px, ${rect.top}px);`;
+
+  const expandDropdown = ({ currentTarget: $target }) => {
+    $target.classList.add('trigger-enter');
+    setTimeout(() => {
+      if ($target.classList.contains('trigger-enter')) {
+        $target.classList.add('trigger-enter-active');
+      }
+    }, 150);
+    $background.classList.add('open');
+
+    const $dropdown = $target.querySelector('.dropdown');
+    const dropdownRect = $dropdown.getBoundingClientRect();
+    console.log(dropdownRect);
+    const navRect = $nav.getBoundingClientRect();
+
+    const backgroundRect = {
+      height: dropdownRect.height,
+      width: dropdownRect.width,
+      top: dropdownRect.top - navRect.top,
+      left: dropdownRect.left - navRect.left,
+    };
+
+    $background.style.cssText = toInlineStyleText(backgroundRect);
+  };
+
+  const foldDropdown = ({ currentTarget }) => {
+    currentTarget.classList.remove('trigger-enter');
+    currentTarget.classList.remove('trigger-enter-active');
+    $background.classList.remove('open');
+  };
+
+  $menus.forEach($menu => $menu.addEventListener('mouseenter', expandDropdown));
+  $menus.forEach($menu => $menu.addEventListener('mouseleave', foldDropdown));
 </script>
 
 </body>

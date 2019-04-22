@@ -29,12 +29,19 @@
     </div>
 
 <script>
-  const msg = new SpeechSynthesisUtterance();
+  const msg = new SpeechSynthesisUtterance('Hello');
   let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+
+  // 일단 voice 는 윈도우 로딩이 끝난 뒤 (또는 비동기로 받아야 한다)
+  // https://stackoverflow.com/questions/49506716/speechsynthesis-getvoices-returns-empty-array-on-windows
+  window.onload = function() {
+    window.speechSynthesis.getVoices().map(voice => console.log(voice);
+  };
+
 </script>
 
 </body>
