@@ -86,3 +86,28 @@ nav a {
   transition: all 0.2s;
   text-transform: uppercase;
 }
+
+/*
+ ======
+ ADDITION
+ ======
+ */
+
+.sticky #main {
+  position: fixed;
+  -webkit-box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sticky #main .logo{
+  max-width: 500px;
+}
+
+.sticky .site-wrap {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Sticky Nav</title>
   <link rel="stylesheet" href="style-START.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 </head>
 <body>
 
@@ -54,6 +55,21 @@
   </div>
 
 <script>
+  const $nav = document.querySelector('#main');
+  const navTop = $nav.offsetTop;
+
+  const stickyNav = (event) => {
+    if (navTop <= window.scrollY) {
+      document.body.style.paddingTop = `${$nav.offsetHeight}px`;
+      document.body.classList.add('sticky');
+    } else {
+      document.body.style.paddingTop = 0;
+      document.body.classList.remove('sticky');
+    }
+  };
+
+  // window.addEventListener('scroll', _.debounce(stickyNav, 30)); // 별로 의미 없는 듯. UX 만 부자연스러워 짐
+  window.addEventListener('scroll', stickyNav);
 
 </script>
 
