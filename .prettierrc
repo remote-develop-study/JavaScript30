@@ -7,7 +7,7 @@
   "htmlWhitespaceSensitivity": "strict",
   "bracketSpacing": true,
   "semi": true,
-  "parser": "babylon",
+  "parser": "babel",
   "trailingComma": "all",
   "endOfLine": "auto",
   "jsxBracketSameLine": true

@@ -15,6 +15,24 @@
   </div>
 
 <script>
+  const speed = document.querySelector('.speed');
+  const bar = speed.querySelector('.speed-bar');
+  const video = document.querySelector('.flex');
+  const { offsetTop, offsetHeight } = speed;  // there are immutable values
+
+  function handleMove(e) {
+    const y = e.pageY - offsetTop;
+    const percent = y / offsetHeight;
+    const min = 0.4;
+    const max = 4;
+    const height = Math.round(percent * 100) + '%';
+    const playSpeed = percent * (max - min) + min;
+    bar.style.height = height;
+    bar.textContent = playSpeed.toFixed(2) + '×';
+    video.playbackRate = playSpeed;
+  }
+
+  speed.addEventListener('mousemove', handleMove);
 </script>
 </body>
 </html>

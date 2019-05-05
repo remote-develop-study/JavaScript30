@@ -34,8 +34,41 @@
     <div class="item item25">25</div>
   </div>
 
-<script>
+<script lang="js" type="application/javascript">
+  const slider = document.querySelector('.items');
+  let clicked = false;
+  let fromX;
+  let scrollLeft;
+
+  window.addEventListener('click', (e) => {
+    console.log(e.pageX);
+  });
+
+  slider.addEventListener('mousedown', (e) => {
+    clicked = true;
+    slider.classList.add('active');
+    fromX = e.pageX - slider.offsetLeft;  // pageX 란 클릭 이벤트 발생할 때 좌측 끝을 기준으로 마우스 커서의 위
+    scrollLeft = slider.scrollLeft;  // Element.scrollLeft 는 엘리먼트가 몇 px 스크롤 되었는지 확인
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    clicked = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    clicked = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!clicked) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;  // HTMLElement.offsetLeft 는 가장 가까운 relative 속성의 부모로부터 좌측에서 몇 px 떨어져 잇는지
+    const moved = (x - fromX) * 3;
+    slider.scrollLeft = scrollLeft - moved;
+  });
 </script>
 
-  </body>
+</body>
 </html>
