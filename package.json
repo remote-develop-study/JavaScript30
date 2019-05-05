@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ch30": "browser-sync start --server --browser \"google chrome\" --files=\"30 - Whack A Mole/*\" --startPath=\"30 - Whack A Mole/index-START.html\"",
-    "ch29": "browser-sync start --server --browser \"google chrome\" --files=\"29 - Countdown Timer/*\" --startPath=\"29 - Countdown Timer/index-START.html\"",
+    "ch29": "browser-sync start --server --browser \"google chrome\" --files=\"29 - Countdown Timer/*\" --startPath=\"29 - Countdown Timer/index.html\"",
     "ch28": "browser-sync start --server --browser \"google chrome\" --files=\"28 - Video Speed Controller/*\" --startPath=\"28 - Video Speed Controller/index-START.html\"",
     "ch27": "browser-sync start --server --browser \"google chrome\" --files=\"27 - Click and Drag/*\" --startPath=\"27 - Click and Drag/index-START.html\"",
     "ch26": "browser-sync start --server --browser \"google chrome\" --files=\"26 - Stripe Follow Along Nav/*\" --startPath=\"26 - Stripe Follow Along Nav/index-START.html\"",
