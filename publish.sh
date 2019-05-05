@@ -10,6 +10,7 @@ excludes=(
   'readme.md'
   'node_modules/*'
   '.prettierrc'
+  '**/*/node_modules/*'
 )
 
 aws s3 sync \
