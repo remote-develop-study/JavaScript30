@@ -47,7 +47,6 @@ h1 {
 
 nav {
   background: black;
-  top: 0;
   width: 100%;
   transition: all 1s;
   position: relative;
@@ -56,6 +55,7 @@ nav {
 
 body.fixed-nav nav {
   position: fixed;
+  top: 0;
   box-shadow: 0 5px 0 rgba(0,0,0,0.1);
 }
 
@@ -74,6 +74,7 @@ nav li {
   align-items: center;
 }
 
+/* difference between width and max-width? */
 li.logo {
   max-width: 0;
   overflow: hidden;
